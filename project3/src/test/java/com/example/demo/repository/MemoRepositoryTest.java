@@ -7,6 +7,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.example.demo.entity.Memo;
 import com.example.demo.repository.MemoRepository;
@@ -67,7 +71,7 @@ public class MemoRepositoryTest {
 		}
 		// 실제 값 꺼내기
 	}
-
+	
 	// 전체조회 or 목록조회
 	@Test
 	public void 데이터전체조회() {
@@ -75,7 +79,6 @@ public class MemoRepositoryTest {
 		// findall 함수를 호출하면 select 쿼리가 생성됨
 		List<Memo> list = repository.findAll();
 		System.out.println(list);
-
 	}
 	@Test
 	public void 데이터수정() {
@@ -119,5 +122,134 @@ public class MemoRepositoryTest {
 		
 		// 1. select로 테이블 조회
 		// 2. 데이터 건수만큼 delete
+	}
+	
+	@Test
+	public void 데이터100개추가() {
+		
+		for(int i =1; i <= 100; i++) {
+			// 메모 생성
+			Memo memo = Memo.builder()
+								.text("sample.."+i)
+								.build();
+			// memo 테이블에 데이터 추가
+			repository.save(memo);
+		}
+	}
+	
+	@Test
+	public void 페이지() {
+		
+		// 페이지 정보를 담은 Pageable 객체를 생성
+		// of 함수를 사용해서 인스턴스 생성
+		// 인자: 조회할 페이지의 번호와 페이지 안에 담을 데이터 개수
+		
+		// 페이지번호는 index로 0번부터 시작됨. 0번은 1페이지
+		// 1페이지에 데이터 10개를 담아서 조회
+		
+		//
+		Pageable pageable = PageRequest.of(0, 10);
+		
+		// memo 테이블 안에 있는 데이터를 조회
+		// 1페이지에 있는 데이터만 조회
+		Page<Memo> page = repository.findAll(pageable);
+		
+		// 페이지 조회를 하면 SQL에 limit 키워드가 추가됨
+		// 첫번째 페이지를 조회했다면 limit 0, 10
+		// 첫번째 행부터 10개를 조회한다는 의미
+		
+		// memo list
+		List<Memo> list = page.getContent();
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
+		
+		// page가 제공하는 여러가지 정보를 꺼내기
+		System.out.println("총 페이지 개수: " + page.getTotalPages());
+		System.out.println("현재 페이지 번호: " + page.getNumber());
+		System.out.println("페이지당 데이터 개수: "+ page.getSize());
+		System.out.println("다음 페이지가 있는지? " + page.hasNext());
+		System.out.println("이 페이지가 첫페이지인지? " + page.isFirst());
+	}
+	// page 구조:
+	// content: memo list
+	// pageable: 페이지 정보
+	// total: data 개수
+	
+	@Test
+	public void 정렬() {
+		// 정렬 조건 만들기
+		// by: 기준컬럼
+		// descending: 정렬 방식 (역정렬) 내림차순..
+		
+		// no 필드를 기준으로 역정렬
+		Sort sort = Sort.by("no").descending();
+		
+		// 페이지 정보 생성
+		// 인자: 페이지번호, 데이터개수, 정렬
+		Pageable pageable = PageRequest.of(0, 10, sort);
+		
+		// 1번 페이지 조회
+		Page<Memo> page = repository.findAll(pageable);
+		
+		// memo list만 꺼내기
+		List<Memo> list = page.getContent();
+		
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
+		
+		// sort를 적용하면 sql에 order by가 추가됨
+	}
+	
+	// 쿼리메소드 테스트
+	
+	@Test
+	public void 범위검색() {
+		
+		// 10~20 사이의 메모를 검색
+		List<Memo> list = repository.findByNoBetween(10, 20);
+		
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
+	}
+	
+	@Test
+	public void 비교검색() {
+		List<Memo> list = repository.findByNoLessThan(10);
+		
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
+	}
+	
+	@Test
+	public void 빈값체크() {
+		List<Memo> list = repository.findByTextIsNull();
+		
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
+	}
+	
+	@Test
+	public void 역정렬() {
+		List<Memo> list = repository.findAllByOrderByNoDesc();
+		System.out.println(list);
+	}
+	
+	@Test
+	public void 삭제() {
+		repository.deleteMemoByNoLessThan(5);
+	}
+	
+	@Test
+	public void 어노테이션테스트1() {
+		// 10번 아래 메모 검색
+		List<Memo> list = repository.get1(10);
+		for(Memo memo : list) {
+			System.out.println(memo);
+		}
 	}
 }
