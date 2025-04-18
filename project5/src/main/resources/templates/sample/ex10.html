@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 자바스크립트에서 컨트롤러에서 전달받은 데이터를 출력 -->
+	
+	<!-- 타임리프에서 제공하는 인라인 속성을 사용 -->
+	<script th:inline="javascript">
+	
+		// 데이터를 받아오기는 했지만, 자바스크립의 자료형으로 처리가 안됨
+		
+		// 인라인 속성을 사용하면 자바스크립트 자료형에 맞게 변환됨
+		// 알맞은 타입으로 변환되어 바로 사용할 수 있음
+		// string-> string
+		let msg = [[${msg}]];
+		// class -> object
+		let dto = [[${dto}]];
+		
+		console.log(dto.no);
+		console.log(dto.text);
+		console.log(dto.regDate);
+	</script>
+</body>
+</html>

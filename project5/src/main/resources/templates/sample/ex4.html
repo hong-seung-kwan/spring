@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 타임리프를 사용해서 컨트롤러에서 전달받은 데이터 출력 -->
+	<!-- 객체 표현식 -->
+	<!-- 객체가 가지고 있는 프로퍼티 꺼내기 -->
+	
+	<!-- object에 도트(.)를 사용하여 프로퍼티 꺼내기 -->
+	<p>번호: [[${dto.no}]]</p>
+	<p>내용: [[${dto.text}]]</p>
+	<p>등록일: [[${dto.regDate}]]</p>
+	
+	<!-- ['key']를 사용하여 프로퍼티 꺼내기 -->
+	<p>번호: [[ ${dto['no']} ]]</p>
+	<p>내용: [[ ${dto['text']} ]]</p>
+	<p>등록일: [[ ${dto['regDate']} ]]</p>
+	
+	<!-- get메소드를 사용하여 프로퍼티 꺼내기 -->
+	<p>번호: [[ ${dto.getNo()} ]]</p>
+	<p>내용: [[ ${dto.getText()} ]]</p>
+	<p>등록일: [[ ${dto.getRegDate()} ]]</p>
+	
+</body>
+</html>

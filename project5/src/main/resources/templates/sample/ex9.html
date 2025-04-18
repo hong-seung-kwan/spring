@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 클래스를 사용해서 스타일을 작성 -->
+<style type="text/css">
+	.yellow {
+		background-color: yellow;
+	}
+</style>
+</head>
+<body>
+	
+	<ul>
+		<!-- 블록태그: html 태그 없이 제어문 작성할때 사용 -->
+		<!-- no가 짝수라면 배경을 노란색으로 표시 -->
+		<th:block th:each="dto:${list}">
+			<!-- 클래스에 조건문을 적용 -->
+			<!-- 삼항연산자 작성 -->
+			<li th:class="${dto.no%2==0} ? yellow : '' ">[[${dto}]]</li>
+		</th:block>
+	</ul>
+	
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- 데이터를 출력하는 두가지 방법. -->
+		
+	<!-- 타임리프를 사용하여 컨트롤러에서 전달받은 데이터를 출력 -->
+	<!-- th:text 속성을 사용하여 컨텐츠 추가 -->
+	<!-- html 태그에 속성을 삽입 -->
+	<p th:text="${msg1}" ></p>
+	
+	<!-- 인라인 표현식을 사용하여 데이터 출력 -->
+	<!-- html 태그 없이 단독으로 사용 가능 -->
+	[[ ${msg2} ]]
+	
+</body>
+</html>

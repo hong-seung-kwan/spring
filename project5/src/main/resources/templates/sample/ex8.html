@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 블록태그: HTML태그 없이 제어문을 쓸수 있는 기능 -->
+	
+	<!-- 반복문 -->
+	<th:block th:each=" dto: ${list}">
+		<p>p태그: [[${dto.no}]]</p>
+		<span>span태그: [[${dto.text}]]</span>
+	</th:block>
+</body>
+</html>

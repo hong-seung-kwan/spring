@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 타임리프에서 제공하는 조건문 사용 -->
+	<!-- 조건을 만족하는 경우는 th:if -->
+	<!-- 조건을 만족하지 않는 경우는 th:unless -->
+	
+	<!-- 조건을 만족하면 태그가 생성되고, 그렇지않으면 생성안됨 -->
+	<p th:if=" 10 % 2 == 0 ">10은 짝수 입니다</p>
+	<p th:if=" 10 % 2 == 1 ">10은 홀수 입니다</p>
+	<!-- unless는 if와 반대로 만족하지 않으면 태그가 생성됨 -->
+	<p th:unless="10 % 2 == 1 ">10은 짝수 입니다</p>
+	
+	<!-- 삼항 연산자 -->
+	<p th:text="10%2==1 ? '짝수':'홀수' "></p>
+	
+	<!-- 반복문을 사용해서 리스트 출력 -->
+	<ul>
+		<li th:each="dto : ${list} ">
+			<!-- 조건문을 사용하여 번호가 2이면 객체의 정보를 출력 -->
+			<p th:text="${dto.no==2}? ${dto} : -- "> </p>
+		</li>
+	</ul>
+	
+	<!-- 같은 내용을 삼항 대신 if와 unless로 작성 -->
+	<ul>
+		<li th:each=" dto : ${list}">
+			<!-- no가 2이면 dto를 출력, 그렇지 않으면 --을 출력 -->
+			<p th:if="${ dto.no==2}">[[ ${dto} ]]</p>
+			<p th:unless="${ dto.no==2}">--</p>		
+		</li>
+	</ul>
+	
+</body>
+</html>
