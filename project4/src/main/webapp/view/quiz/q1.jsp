@@ -7,12 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<form action="/v2/save" method="post">
-		아이디: <input type="text" name="userId">
-		패스워드: <input type="password" name="password">
-		<button type="submit">전송</button>
-	</form>
-	
+	<p><b>이름:둘리</b></p> 
+	<p><b>나이:20</b></p>
+	<p><b>주소:인천 구월동</b></p>
 </body>
 </html>
