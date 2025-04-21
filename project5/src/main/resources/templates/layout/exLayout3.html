@@ -1,0 +1,47 @@
+<!-- 템플릿 레이아웃 -->
+<!-- 2번째 방식은 레이아웃을 하나만 쓰기때문에 -->
+<!-- 변경사항이 생겼을때 파일을 한번만 수정하면됨 (유지보수에 유리) -->
+
+<!-- 조각이 레이아웃을 선택하는 방식 -->
+<!DOCTYPE html>
+
+<th:block th:fragment="setContent(content)">
+
+<style>
+    .header {
+        height: 20vh;
+        background-color: pink;
+    }
+    .content {
+        height: 30vh;
+        background-color: lightgray;
+    }
+    .footer {
+        height: 10vh;
+        background-color: green;
+    }
+</style>
+
+<!-- html 문서의 상단과 하단을 블록태그로 감싸기 -->
+<!-- tr:fragment => 외부에서 전달한 조각코드 받기 -->
+
+
+
+<body>
+<div class="header">
+    <h1>HEADER</h1>
+</div>
+<!-- 전달받은 content 출력 -->
+<div class="content" >
+	<!-- th:replace => 전달받은 파라미터를 블록태그에 교체 -->
+	<th:block th:replace="${content}">
+	</th:block>
+	
+</div>
+<div class="footer">
+    <h1>FOOTER</h1>
+</div>
+</body>
+
+</th:block>
+</html>

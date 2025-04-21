@@ -32,7 +32,7 @@ public class QuizController {
 	@GetMapping("/q3")
 	public void q3(Model model) {
 		PersonDTO dto = PersonDTO.builder()
-											.name("둘리")
+											.Name("둘리")
 											.age(20)
 											.address("인천 구월동")
 											.build();
@@ -64,4 +64,17 @@ public class QuizController {
 		list.add(new PersonDTO("도우너", 40, "부산 문래동"));
 		model.addAttribute("list",list);
 	}
+	
+	// 화면에 전달할 데이터가 동일할때는 같은 함수 사용
+	@GetMapping({"/q8","/q9"})
+	public void q8(Model model) {
+		List<PersonDTO> list = new ArrayList<>();
+		list.add(new PersonDTO("박하나", 25, "인천 구월동"));
+		list.add(new PersonDTO("홍재범", 17, "서울 신림동"));
+		list.add(new PersonDTO("문유리", 31, "부산 문래동"));
+		list.add(new PersonDTO("김재민", 8, "인천 연수동"));
+		list.add(new PersonDTO("장유라", 33, "부산 문래동"));
+		model.addAttribute("list",list);
+	}
+	
 }

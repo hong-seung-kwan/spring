@@ -15,7 +15,8 @@ import lombok.ToString;
 @Builder
 public class PersonDTO {
 
-	private String name;
-	private int age;
-	private String address;
+	String Name;
+	int age;
+	String address;
+	
 }

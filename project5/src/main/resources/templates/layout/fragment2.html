@@ -1,0 +1,17 @@
+<!-- 콘텐츠로 사용할 조각 코드 만들기 -->
+
+<!-- 조각을 레이아웃에 전달 -->
+<!-- ~{} 조각표현식 -->
+<!-- 레이아웃 파일의 경로 :: 함수호출 -->
+
+<!-- 이파일에 있는 조각을 exLayout3에 파일로 전달 -->
+<th:block th:replace="~{/layout/exLayout3 :: setContent(~{this::content})}">
+
+    <!-- 1. 코드 조각 정의 -->
+    <th:block th:fragment="content">
+
+        <h1>조각1</h1>
+
+    </th:block>
+
+</th:block>

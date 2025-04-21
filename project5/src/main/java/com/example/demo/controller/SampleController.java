@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import com.example.demo.dto.SampleDTO;
 // SampleContoroller는 프로젝트가 실행될 때, 자동으로 빈으로 등록됨
 // 그리고 외부에서 요청이 들어오면 해당 빈이 실행됨
 @Controller
+// sample은 중간경로
+// 클래스 안에 있는 모든 함수에 적용됨
 @RequestMapping("/sample") // 중간경로
 
 public class SampleController {
@@ -111,5 +114,15 @@ public class SampleController {
 		model.addAttribute("msg","seccess");
 	}
 	
-	
+	// 전체 URL: /sample/ex11
+	// 반환타입: void => url 경로가 파일의 경로가 됨
+	// 파일의 경로: sample 폴더 아래 ex11.html
+	// 매개변수: 파라미터 또는 model
+	// model: 컨트롤러에서 화면으로 데이터를 전달하는 객체
+	@GetMapping("/ex11")
+	public void ex11(Model model) {
+		
+		// 화면에 현재시간을 전달
+		model.addAttribute("date", LocalDateTime.now());
+	}
 }

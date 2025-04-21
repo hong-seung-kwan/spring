@@ -1,0 +1,39 @@
+<!-- 템플릿 레이아웃 -->
+
+<!-- 첫번째 방식의 문제점: -->
+<!-- 바뀐 부분이 있으면 모든 페이지를 수정해야함 -->
+<!DOCTYPE html>
+
+<style>
+    .header {
+        height: 20vh;
+        background-color: pink;
+    }
+    .content {
+        height: 30vh;
+        background-color: lightgray;
+    }
+    .footer {
+        height: 10vh;
+        background-color: green;
+    }
+</style>
+
+<body>
+
+<div class="header">
+    <h1>HEADER</h1>
+</div>
+<!-- 다른 파일에 있는 내용으로 교체 -->
+<div class="content" >
+	
+	<!-- fragment 파일의 두번째 조각 가져오기 -->
+	<th:block th:replace = "~{layout/fragment :: frag2}"></th:block>
+
+</div>
+<div class="footer">
+    <h1>FOOTER</h1>
+</div>
+
+</body>
+</html>

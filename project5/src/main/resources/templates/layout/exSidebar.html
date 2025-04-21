@@ -1,0 +1,13 @@
+<!-- 조각 -->
+<!-- 콘텐츠로 사용할 코드 조각 만들기 -->
+
+<!-- 조각이 레이아웃을 선택하는 방식 -->
+<!-- 레이아웃에 조각을 전달 -->
+<th:block th:replace="~{ /layout/exLayout3 :: setContent(~{this::content}) }">
+
+	<!-- content라는 이름으로 조각 만들기 -->
+	<th:block th:fragment="content">
+		<h1>exSidebar Page</h1>
+	</th:block>
+
+</th:block>

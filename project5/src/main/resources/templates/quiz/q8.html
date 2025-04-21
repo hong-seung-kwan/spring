@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table,td,th{
+		border: 1px solid black
+	}
+	th,td {
+		width: 100px;
+		text-align: center;
+	}
+	table {
+		border-collapse: collapse;
+	}
+</style>
+</head>
+<body>
+	<table>
+	<!-- 성,이름,거주여부는 가공 -->
+		<tr>
+			<th>성</th>
+			<th>이름</th>
+			<th>나이</th>
+			<th>주소</th>
+			<th>인천 거주 여부</th>
+		</tr>
+		<!-- <tr> 태그는 컨트롤러에서 전달받은 리스트에 따라 변경됨 -->
+		<!-- 리스트의 크기가 tr 태그의 개수가 됨 -->
+		<!-- 타임리프 반복문 사용 -->
+		<!-- 리스트 크기만 tr 생성되고 리스트 요소가 추가됨 -->
+		<tr th:each="dto:${list}">			
+			<!-- 문자열 객체를 사용하여 성과 이름으로 자르기 -->
+			<!-- substring => 인자: 원본문자열, 시작index, 마지막index(포함x) -->
+			<td>[[${#strings.substring(dto.name,0,1)}]]</td>
+			<td>[[${#strings.substring(dto.name,1,3)}]]</td>
+			<td>[[${dto.age}]]</td>
+			<td>[[${dto.address}]]</td>	
+			<!-- 인천거주여부:address 사용하여 생성 -->
+			<!-- address에 인천이 포함되어 있는지 확인 -->
+			<!-- 인자: 원본문자열, 검색대상 -->
+			<!-- true면 거주 false면 비거주로 출력 -->
+			<!-- 타임리프에서 제공하는 if 또는 unless 사용 또는 삼항연산자 -->
+			<td>[[${#strings.contains(dto.address,'인천')== true}? 거주 : 비거주]]</td>
+		</tr>
+	</table>
+</body>
+</html>
