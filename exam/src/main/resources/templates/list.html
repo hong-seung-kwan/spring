@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+    th {
+      background-color: #C0C0C0;
+    }
+    th, td {
+      padding: 10px 30px;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    .title-div {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="title-div">
+  <h3>Reservation List Page</h3>
+  <a class="registerLink" href="/register">새로운 예약정보 등록</a>
+</div>
+
+<table>
+  <tr>
+    <th>예약번호</th>
+    <th>예약일</th>
+    <th>객실번호</th>
+    <th>예약자</th>
+  </tr>
+  <tr th:each= "dto:${list}">
+    <td><a th:href="@{/read(no = ${dto.no})}">[[${dto.no}]]</a></td>
+    <td>[[${dto.checkInDate}]]</td>
+    <td>[[${dto.roomNo}]]</td>
+    <td>[[${dto.guestName}]]</td>
+  </tr>
+</table>
+</body>
+
+</html>

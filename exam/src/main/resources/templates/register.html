@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+    }
+    label {
+        display: inline-block;
+        width: 100px;
+    }
+    button {
+        margin-top: 20px;
+        width: 100px;
+    }
+    .title-div {
+      margin-bottom: 30px;
+    }
+</style>
+</head>
+
+<body>
+<div class="title-div">
+    <h3>Reservation Register Page</h3>
+</div>
+
+<form action="/register" method="post">
+    <div>
+        <label for="checkInDate">예약일</label>
+        <input type="text" id="checkInDate" name="checkInDate" placeholder="2024-09-10"/>
+    </div>
+    <div>
+        <label for="roomNo">객실번호</label>
+        <input type="text" id="roomNo" name="roomNo" />
+    </div>
+    <div>
+        <label for="guestName">예약자</label>
+        <input type="text" id="guestName" name="guestName" />
+    </div>
+    <div>
+        <label for="guestPhone">예약자 연락처</label>
+        <input type="text" id="guestPhone" name="guestPhone" placeholder="010-1234-5678"/>
+    </div>
+    <button type="submit">전송</button>
+</form>
+</body>
+
+</html>
