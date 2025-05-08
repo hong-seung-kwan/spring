@@ -36,7 +36,7 @@ public class ReservationServiceTest {
 	
 	@Test
 	void 예약정보단건조회() {
-		ReservationDTO dto = service.read(1);
+		ReservationDTO dto = service.read(10);
 		
 		System.out.println(dto);
 	}
