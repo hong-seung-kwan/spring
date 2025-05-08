@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>운세 보는 챗도지</title>
+<style type="text/css">
+
+	/* 바디 스타일 */
+	body {
+		background-color: #f0f0f0;
+		padding: 20px;
+		
+	}
+	/* 채팅창 */
+	#chat-box {
+		width: 100%;
+		max-width: 600px;
+		height: 400px;
+		background-color: white;
+		border: 1px solid lightgray;
+		border-radius: 8px; 
+		padding: 10px;
+		/* 세로 스크롤 */
+		overflow-y: auto;
+	}
+	/* 입력필드 */
+	#input-box {
+		width: 100%;
+		max-width: 600px;
+		padding: 10px;
+	}
+	/* 메세지 */
+	#msg-input {
+		width: 70%;
+		padding: 10px;
+		border: 1px solid lightgray;
+		border-radius: 20px;
+	}
+	/* 전송 버튼 */
+	#send-button {
+		background-color: deepskyblue;
+		color: white;
+		border: none;
+		border-radius: 20px;
+		padding: 10px;
+		cursor: pointer;
+		margin-left: 10px;
+	}
+	/* 버튼에 마우스 올렸을 때 */
+	#send-button:hover {
+		background-color: dodgerblue; /* 선명한 파란색 */
+	}
+	/* 사용자 메시지 */
+	.user {
+		background-color: #e2f7fd; /* 하늘색 */
+		text-align: right;
+		margin-bottom: 8px;
+	}
+	/* 챗봇 응답 */
+	.bot {
+		background-color: #f1f1f1; /* 회색 */
+		text-align: left;
+		margin-bottom: 8px;
+	}
+</style>
+</head>
+<body>
+	
+	<!-- <button onclick="postJSON()">요청하기</button> -->
+	
+	<!-- 타이틀, 채팅창, 메시지입력필드, 전송버튼 추가 -->
+	
+	<h2>운세 보는 챗도지</h2>
+	
+	<!-- 채팅창 -->
+	<div id="chat-box"></div>
+	
+	<!-- 입력필드 -->
+	<div id="input-box">
+		<input type="text" id="msg-input" placeholder="메세지를 입력하세요..">
+		<button id="send-button" onclick="postJSON()">보내기</button>
+	</div>
+	
+	
+	<script type="text/javascript">
+		
+		// 채팅 내용을 저장
+		// 대화를 저장해야하므로 배열로 생성
+		// 사용자 메세지
+		let userMsg = [];
+		// 챗봇 답변
+		let botMsg = [];
+		
+		
+		// 백엔드 서버에 운세정보를 요청
+		async function postJSON() {
+/* 		  // 가짜 데이터			
+		  const data = {
+			userMsg: userMsg,
+			botMsg: botMsg,				  
+		  }; */
+		  
+		  // 입력필드 가져오기
+		  const input = document.getElementById('msg-input');
+		  // 입력필드 안에 있는 값 꺼내기
+		  const text = input.value;
+		  // 사용자 메세지를 출력할 태그 생성
+		  const msg = document.createElement('div');
+		  msg.textContent = text;
+		  // 스타일을 적용하기 위해, 태그에 class 이름 추가
+		  msg.classList.add('user');
+		  // 채팅창에 사용자 메세지 추가
+		  const chatBox = document.getElementById('chat-box');
+		  // 채팅 div 태크게 자식 태그 추가
+		  chatBox.appendChild(msg);		  
+		  // 채팅장 사용자 메세지를 표시한 후에, 입력필드 초기화
+		  input.value = '';
+		  
+		  // 배열에 담기
+		  userMsg.push(text);
+		  console.log(userMsg);
+		  try {
+			// 운세API를 호출하기 위해 주소와 메소드 작성
+			// fetch는 비동기 함수
+			// 서버가 응답할때까지 기다렸다가 결과를 처리함
+			const response = await fetch("/fortuneTell", {
+			  method: "POST", // 또는 'PUT'
+			  headers: {
+			    "Content-Type": "application/json",
+			  },
+			  // json객체를 json형식의 string으로 변환
+			  body: JSON.stringify(
+					 {
+						 userMsg: userMsg,
+						 botMsg: botMsg
+					 }	  
+			  
+			  ),
+		    });
+		   
+			// response: 응답 객체
+			// response.json: 응답메세지의 데이터를 꺼내서 객체로 변환하는 함수
+		    // const result = await response.json();
+			// response.text: 응답메세지의 string 데이터 꺼내기
+			const result = await response.text();
+		   /*  console.log("성공:", result); */
+		    
+		    // GPT API를 호출하고 응답받은 결과를 화면에 표시
+		    // 챗봇 응답을 표시할 태그를 생성
+		    const boxMsg = document.createElement('div');
+		    boxMsg.textContent = result;
+		    // 스타일 적용하기 위해 태그에 클래스 추가
+		    boxMsg.classList.add('bot');		    
+		    // 채팅창에 챗봇 응답 추가
+		    chatBox.appendChild(boxMsg);
+		    // 배열에 담기
+		    botMsg.push(result);
+		    console.log(botMsg);
+		 }  catch (error) {
+		    console.error("실패:", error);
+		}
+	  }		
+	</script>
+	
+	
+</body>
+</html>
