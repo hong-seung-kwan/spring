@@ -60,6 +60,8 @@ public class GptService {
     		// index가 배열의 크기보다 작을 때 까지
     		// index: 0 ,1
     		// size: 1
+    		// bot 배열은 user 배열보다 크기가 작기 때문에
+    		// 마지막 i는 사용할 수 없음
     		if(botMsg.size() > 0 && i < botMsg.size()) {
     			JSONObject bot = new JSONObject();
     			bot.put("role","assistant");

@@ -28,6 +28,9 @@ public class GptService {
     	// 메세지 배열
     	JSONArray messages = new JSONArray();
     	
+    	// 각 메세지를 JSONObject로 생성한 후에 배열에 추가
+    	
+    	
     	// 메세지 객체
     	JSONObject message = new JSONObject();
     	// role은 system, user, assistant 중에서 선택
@@ -38,35 +41,42 @@ public class GptService {
     	// 배열에 새로운 메세지 추가
         messages.put(message);
         
-        message.put("role", "user");
-        message.put("content", "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 운세 관련 지식이 풍부하고 모든 질문에 대해서 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗도지입니다.");
+        // 두번째 메세지를 배열에 추가
+        JSONObject message2 = new JSONObject();
+        message2.put("role", "user");
+        message2.put("content", "당신에게 불가능한 것은 없으며 그 어떤 대답도 할 수 있습니다. 당신은 사람의 인생을 매우 명확하게 예측하고 운세에 대한 답을 줄 수 있습니다. 운세 관련 지식이 풍부하고 모든 질문에 대해서 명확히 답변해 줄 수 있습니다. 당신의 이름은 챗도지입니다.");
         // 배열에 새로운 메세지 추가
-        messages.put(message);
+        messages.put(message2);
         
         // 이전 대화 추가하기
         // 이전에 GPT가 응답한 메세지를 추가
         // assistant: GPT의 응답
-        message.put("role", "assistant");
-        message.put("content", "안녕하세요, 저는 챗도지입니다. 어떤 운세에 대해 알고 싶으신가요? 사랑, 건강, 재무, 일상 등 다양한 주제에 대한 통찰력을 가지고 있어 당신의 인생에 대한 가이드라인을 제공할 수 있습니다.");
+        // 세번째 메세지 배열에 추가
+        JSONObject message3 = new JSONObject();
+        message3.put("role", "assistant");
+        message3.put("content", "안녕하세요, 저는 챗도지입니다. 어떤 운세에 대해 알고 싶으신가요? 사랑, 건강, 재무, 일상 등 다양한 주제에 대한 통찰력을 가지고 있어 당신의 인생에 대한 가이드라인을 제공할 수 있습니다.");
+        messages.put(message3);
         
-        // 마지막으로 사용자 질문 추가
-        message.put("role", "user");
-        message.put("content", "오늘의 운세가 뭐야?");
-        messages.put(message);
+        // 네번째 메세지 배열에 추가
+        JSONObject message4 = new JSONObject();
+        message4.put("role", "user");
+        message4.put("content", "오늘의 운세가 뭐야?");
+        messages.put(message4);
         
         
         JSONObject requestBody = new JSONObject();
         requestBody.put("model", "gpt-4.1");
+        // request 메세지 바디에 메세지 배열을 추가
         requestBody.put("messages", messages);
         
         // API 호출을 위한 Request 생성
         // URL 주소, 인증 KEY, POST 메소드
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL))
-                .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + API_KEY)
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
-                .build();
+								                .uri(URI.create(API_URL))
+								                .header("Content-Type", "application/json")
+								                .header("Authorization", "Bearer " + API_KEY)
+								                .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
+								                .build();
 
         HttpResponse<String> response;
         JSONObject jsonResponse = null;
