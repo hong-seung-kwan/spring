@@ -41,7 +41,7 @@ public class MemberController {
 	
 	// 회원가입 화면을 반환하는 메소드
 	// 반환값: member 폴더 아래 register.html
-	@GetMapping("/register")
+	@GetMapping("/member/register")
 	public String register() {
 		return "member/register";
 	}
@@ -51,7 +51,7 @@ public class MemberController {
 	// 회원가입에 성공하면 메인화면으로 이동
 	// 회원 목록화면은 관리자만 접근 가능
 	// 일반회원은 볼 수 없음
-	@PostMapping("/register")
+	@PostMapping("/member/register")
 	public String registerPost(MemberDTO dto, RedirectAttributes attributes) {
 		
 		// 새로운 회원 추가
