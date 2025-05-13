@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.service.ProductService;
@@ -34,10 +35,24 @@ public class ProductController {
 //	}
 
 	@GetMapping("/productInfo")
-	public void info(Model model) {
-		List<ProductDTO> product = service.getList();
+	public void productInfo(Model model,@RequestParam(name = "no") int productNo) {
+		ProductDTO product = service.read(productNo);
 
 		model.addAttribute("product", product);
+	}
+	
+	@GetMapping("/modify")
+	public void modify(Model model,@RequestParam(name = "no") int productNo) {
+		ProductDTO product = service.read(productNo);
+
+		model.addAttribute("product", product);
+	}
+	
+	@PostMapping("/modify")
+	public String modifyPost(ProductDTO dto) {
+		service.modify(dto);
+		
+		return "redirect:/home";
 	}
 
 }

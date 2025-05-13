@@ -40,25 +40,32 @@
 		</div>
 	</nav>
 	<div class="productForm">
-		<div class="h2"><h2>상품 등록</h2></div>
-		<form action="/productReg" method="post">
+		<div class="h2">
+			<h2>상품 등록</h2>
+		</div>
+		<form action="/modify" method="post">
 			<div>
-				<label>상품명</label><input type="text" name="name">
+				<label>상품명</label><input type="text" name="name"
+					th:value="${product.name}">
 			</div>
 			<div>
-				<label>가격</label><input type="text" name="price">
+				<label>가격</label><input type="text" name="price"
+					th:value="${product.price}">
 			</div>
 			<div>
-				<label>상품설명</label><input type="text" name="content">
+				<label>상품설명</label><input type="text" name="content"
+					th:value="${product.content}">
 			</div>
 			<div>
-				<label>이미지</label><input type="file" name="imageUrl">
+				<label>이미지</label><input type="file" name="imageUrl"
+					th:value="${product.imageUrl}">
 			</div>
 			<div>
-				<label>카테고리</label><input type="text" name="category">
+				<label>카테고리</label><input type="text" name="category"
+					th:value="${product.category}">
 			</div>
-			<button type="submit">전송</button>
 		</form>
+		<button type="submit" class = "modifyBtn">수정하기</button>
 	</div>
 </body>
 </html>
