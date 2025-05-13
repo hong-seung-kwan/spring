@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.entity.Product;
 
@@ -8,6 +10,8 @@ public interface ProductService {
 	int register(ProductDTO dto);
 	
 	ProductDTO read(int productNo);
+	
+	List<ProductDTO> getList();
 	
 	void modify(ProductDTO dto);
 	

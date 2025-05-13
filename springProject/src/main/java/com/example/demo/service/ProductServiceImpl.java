@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,22 @@ public class ProductServiceImpl implements ProductService {
 		if(optional.isPresent()) {
 			repository.deleteById(productNo);
 		}
+	}
+
+	@Override
+	public List<ProductDTO> getList() {
+		
+		List<Product> product = repository.findAll();
+		
+		List<ProductDTO> dto = new ArrayList<>();
+		
+		for(Product entity : product) {
+			ProductDTO productDTO = entityToDto(entity);
+			dto.add(productDTO);
+		}
+		
+		
+		return dto;
 	}
 
 }
