@@ -45,6 +45,10 @@
 		</div>
 		<form action="/modify" method="post">
 			<div>
+				<label>상품번호</label><input type="text" name="productNo"
+					th:value="${product.productNo}" readonly>
+			</div>
+			<div>
 				<label>상품명</label><input type="text" name="name"
 					th:value="${product.name}">
 			</div>
@@ -64,8 +68,10 @@
 				<label>카테고리</label><input type="text" name="category"
 					th:value="${product.category}">
 			</div>
+			<button type="submit" name="action" value="modify" onclick="return confirm('수정하시겠습니까?');">수정하기</button>
+			<button type="submit" name="action" value="remove" onclick="return confirm('정말 삭제하시겠습니까?');">삭제하기</button>
 		</form>
-		<button type="submit" class = "modifyBtn">수정하기</button>
+		
 	</div>
 </body>
 </html>

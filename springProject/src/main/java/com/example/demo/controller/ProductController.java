@@ -48,11 +48,20 @@ public class ProductController {
 		model.addAttribute("product", product);
 	}
 	
+//	@PostMapping("/modify")
+//	public String modifyPost(ProductDTO dto) {
+//		service.modify(dto);
+//		
+//		return "redirect:/home";
+//	}
 	@PostMapping("/modify")
-	public String modifyPost(ProductDTO dto) {
-		service.modify(dto);
+	public String modifyPost(@RequestParam("action") String action,ProductDTO dto) {
+		if ("modify".equals(action)) {
+			service.modify(dto);
+		} else if ("remove".equals(action)) {
+			service.remove(dto.getProductNo());
+		}
 		
 		return "redirect:/home";
 	}
-
 }
