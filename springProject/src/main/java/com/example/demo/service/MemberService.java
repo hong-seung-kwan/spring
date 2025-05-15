@@ -7,6 +7,7 @@ public interface MemberService {
 
 	
 	boolean register(MemberDTO dto);
+	MemberDTO read(String userId);
 	
 	default MemberDTO entityToDto(Member member) {
 		

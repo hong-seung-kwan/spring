@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입</title>
+  <title>로그인</title>
   <style>
     * {
       box-sizing: border-box;
@@ -21,13 +21,18 @@
       padding: 20px;
     }
     
-    .signup-container {
+    .login-container {
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 500px;
+      max-width: 400px;
       padding: 40px;
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
     }
     
     h1 {
@@ -63,6 +68,17 @@
       box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
     }
     
+    .remember-me {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .remember-me input {
+      width: auto;
+      margin-right: 8px;
+    }
+    
     button {
       background-color: #4a90e2;
       color: white;
@@ -74,7 +90,6 @@
       width: 100%;
       cursor: pointer;
       transition: background-color 0.3s;
-      margin-top: 10px;
     }
     
     button:hover {
@@ -97,52 +112,105 @@
       text-decoration: underline;
     }
     
+    .social-login {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .social-login p {
+      color: #777;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .social-login p::before,
+    .social-login p::after {
+      content: "";
+      display: inline-block;
+      width: 40%;
+      height: 1px;
+      background-color: #ddd;
+      position: absolute;
+      top: 50%;
+    }
+    
+    .social-login p::before {
+      left: 0;
+    }
+    
+    .social-login p::after {
+      right: 0;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .social-icon:hover {
+      background-color: #e5e5e5;
+    }
+    
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    
+    .forgot-password a {
+      color: #777;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    
+    .forgot-password a:hover {
+      color: #4a90e2;
+      text-decoration: underline;
+    }
+    
     @media (max-width: 600px) {
-      .signup-container {
+      .login-container {
         padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="signup-container">
-    <h1>회원가입</h1>
-    <form action="/register" method="post">
+  <div class="login-container">
+    <div class="logo">
+    </div>
+    
+    <h1>로그인</h1>
+    
+    <form action="/login" method="post">
+    <div th:if= '${ param.error != null}' class="alert alert-danger">ID 또는 비밀번호가 틀렸습니다</div>
       <div class="form-group">
         <label for="userId">아이디</label>
-        <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
+        <input type="text" name="username" placeholder="아이디를 입력하세요" required>
       </div>
       
       <div class="form-group">
         <label for="userPw">비밀번호</label>
-        <input type="password" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요" required>
+        <input type="password" id="userPw" name="password" placeholder="비밀번호를 입력하세요" required>
       </div>
-      
-      <div class="form-group">
-        <label for="userName">이름</label>
-        <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="userAddress">주소</label>
-        <input type="text" id="userAddress" name="userAddress" placeholder="주소를 입력하세요">
-      </div>
-      
-      <div class="form-group">
-        <label for="userPhone">휴대폰번호</label>
-        <input type="tel" id="userPhone" name="userPhone" placeholder="휴대폰번호를 입력하세요">
-      </div>
-      
-      <div class="form-group">
-        <label for="role">권한</label>
-        <input type="text" id="role" name="role" placeholder="권한을 입력하세요">
-      </div>
-      
-      <button type="submit">가입하기</button>
+
+      <button type="submit">로그인</button>
     </form>
     
     <div class="form-footer">
-      이미 계정이 있으신가요? <a href="/login">로그인</a>
+      계정이 없으신가요? <a href="/register">회원가입</a>
     </div>
   </div>
 </body>

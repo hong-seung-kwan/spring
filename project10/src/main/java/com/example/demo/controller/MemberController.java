@@ -65,7 +65,7 @@ public class MemberController {
 			// 실패했으면 다시 등록화면으로 돌아가기
 			// 이때 실패메시지 전달
 			attributes.addFlashAttribute("msg","아이디가 중복되어 등록에 실패하였습니다..");
-			return "redirect:/register";
+			return "redirect:/member/register";
 		}
 		
 	}

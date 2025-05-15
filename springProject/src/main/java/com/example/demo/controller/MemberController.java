@@ -22,5 +22,9 @@ public class MemberController {
 	@PostMapping("/register")
 	public void registerPost(MemberDTO dto) {		
 		service.register(dto);	
-	}	
+	}
+	
+	@GetMapping("/login")
+	public void login() {		
+	}
 }

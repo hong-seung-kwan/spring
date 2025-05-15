@@ -34,7 +34,7 @@ public class SecurityConfig {
 		// 게시물관리와 댓글관리는 일반사용자 또는 관리자만 접근 가능
 		// 회원관리는 관리자만 접근 가능
 		http.authorizeRequests()
-			.requestMatchers("/register").permitAll()
+			.requestMatchers("/member/register").permitAll()
 			.requestMatchers("/").authenticated()
 			.requestMatchers("/board/*").hasAnyRole("ADMIN", "USER")
 			.requestMatchers("/comment/*").hasAnyRole("ADMIN", "USER")

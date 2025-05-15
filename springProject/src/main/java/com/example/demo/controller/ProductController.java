@@ -19,12 +19,12 @@ public class ProductController {
 	@Autowired
 	ProductService service;
 
-	@GetMapping("/productReg")
+	@GetMapping("/productRegister")
 	public void register() {
 
 	}
 
-	@PostMapping("/productReg")
+	@PostMapping("/productRegister")
 	public void registerPost(ProductDTO dto) {
 		service.register(dto);
 	}
@@ -41,20 +41,15 @@ public class ProductController {
 		model.addAttribute("product", product);
 	}
 	
-	@GetMapping("/modify")
+	@GetMapping("/productModify")
 	public void modify(Model model,@RequestParam(name = "no") int productNo) {
 		ProductDTO product = service.read(productNo);
 
 		model.addAttribute("product", product);
 	}
 	
-//	@PostMapping("/modify")
-//	public String modifyPost(ProductDTO dto) {
-//		service.modify(dto);
-//		
-//		return "redirect:/home";
-//	}
-	@PostMapping("/modify")
+
+	@PostMapping("/productModify")
 	public String modifyPost(@RequestParam("action") String action,ProductDTO dto) {
 		if ("modify".equals(action)) {
 			service.modify(dto);
@@ -63,5 +58,17 @@ public class ProductController {
 		}
 		
 		return "redirect:/home";
+	}
+	
+//	@PostMapping("/modify")
+//	public String modifyPost(ProductDTO dto) {
+//		service.modify(dto);
+//		
+//		return "redirect:/home";
+//	}
+	
+	@GetMapping("/cart")
+	public void cart() {
+		
 	}
 }

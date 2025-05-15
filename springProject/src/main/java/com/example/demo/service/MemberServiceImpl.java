@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.MemberDTO;
@@ -15,6 +16,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberRepository repository;
 	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	
 	@Override
@@ -32,6 +35,21 @@ public class MemberServiceImpl implements MemberService {
 			repository.save(entity);
 			return true;
 		}	
+	}
+
+
+
+	@Override
+	public MemberDTO read(String userId) {
+		
+		Optional<Member> optional = repository.findById(userId);
+		if(optional.isPresent()) {
+			Member member = optional.get();
+			MemberDTO dto = entityToDto(member);
+			return dto;
+		}
+		
+		return null;
 	}
 
 	
