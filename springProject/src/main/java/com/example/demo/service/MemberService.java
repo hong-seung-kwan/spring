@@ -23,7 +23,7 @@ public interface MemberService {
 		return dto;
 	}
 	
-default Member dtoToEntity(MemberDTO dto) {
+	default Member dtoToEntity(MemberDTO dto) {
 		
 		Member member = Member.builder()
 										.userId(dto.getUserId())

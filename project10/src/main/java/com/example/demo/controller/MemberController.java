@@ -60,7 +60,7 @@ public class MemberController {
 		// 등록에 성공했으면 목록화면으로
 		// 그렇지 않으면 실패메세지 표시
 		if(result) {
-			return "redirect:/";
+			return "redirect:/login";
 		}else{
 			// 실패했으면 다시 등록화면으로 돌아가기
 			// 이때 실패메시지 전달

@@ -32,6 +32,12 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 			System.out.println("회원가입이 완료되었습니다");
 			Member entity = dtoToEntity(dto);
+			
+			String password = entity.getUserPw();
+			String enpw = passwordEncoder.encode(password);
+			
+			entity.setUserPw(enpw);
+			
 			repository.save(entity);
 			return true;
 		}	

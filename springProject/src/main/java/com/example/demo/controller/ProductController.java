@@ -67,8 +67,4 @@ public class ProductController {
 //		return "redirect:/home";
 //	}
 	
-	@GetMapping("/cart")
-	public void cart() {
-		
-	}
 }
