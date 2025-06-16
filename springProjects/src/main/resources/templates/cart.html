@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>장바구니</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .cart-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .cart-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+    .cart-item {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .cart-item-content {
+      display: flex;
+      gap: 15px;
+    }
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .cart-item-details {
+      flex: 1;
+    }
+    .cart-item-name {
+      font-weight: 500;
+      margin: 0 0 5px 0;
+    }
+    .cart-item-id {
+      color: #666;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+    .cart-item-price {
+      font-weight: 500;
+    }
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .quantity-btn {
+      background: none;
+      border: none;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .quantity-value {
+      width: 30px;
+      text-align: center;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 4px;
+    }
+    .summary-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .summary-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .summary-label {
+      color: #666;
+    }
+    .summary-total {
+      font-weight: bold;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+    .checkout-btn {
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      width: 92%;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+    .continue-shopping-btn {
+      background-color: white;
+      color: #000;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 12px;
+      width: 92%;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+    }
+    .empty-cart {
+      text-align: center;
+      padding: 60px 0;
+      display: none; /* 기본적으로 숨김 */
+    }
+    .empty-cart-icon {
+      font-size: 3rem;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .empty-cart-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .empty-cart-message {
+      color: #666;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="8" cy="21" r="1"></circle>
+        <circle cx="19" cy="21" r="1"></circle>
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+      </svg>
+      장바구니
+    </h1>
+
+    
+    <div class="cart-grid">
+      <div class="cart-items">
+        <div class="cart-item">
+          <div class="cart-item-content">
+            <img src="https://via.placeholder.com/80" alt="프리미엄 티셔츠" class="cart-item-image">
+            <div class="cart-item-details">
+              <h3 class="cart-item-name">프리미엄 티셔츠</h3>
+              <p class="cart-item-id">상품 ID: 1</p>
+              <p class="cart-item-price">29,000원</p>
+            </div>
+            <div class="cart-item-actions">
+              <button class="remove-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 6h18"></path>
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                </svg>
+              </button>
+              <div class="quantity-control">
+                <button class="quantity-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </button>
+                <span class="quantity-value">1</span>
+                <button class="quantity-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14"></path>
+                    <path d="M5 12h14"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+	   </div>
+
+      <div class="summary">
+        <div class="summary-card">
+          <h2 class="summary-title">주문 요약</h2>
+          <div class="summary-row">
+            <span class="summary-label">상품 금액</span>
+            <span class="summary-value">236,000원</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">배송비</span>
+            <span class="summary-value">3,000원</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>총 결제 금액</span>
+            <span>239,000원</span>
+          </div>
+          <a href="#" class="checkout-btn">결제하기</a>
+          <a href="#" class="continue-shopping-btn">쇼핑 계속하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

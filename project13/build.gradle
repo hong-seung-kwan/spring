@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.4.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
 }
 
 group = 'com.example'
@@ -24,14 +24,24 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.2'
+	
+	// 단위테스트 에러 해결
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
-	testCompileOnly 'org.projectlombok:lombok:1.18.30'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+	// 시큐리티 라이브러리 추가
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	// json 라이브러리 추가
+	//implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    //implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    //implementation 'net.minidev:json-smart:2.4.7'
 }
 
 tasks.named('test') {

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="css/styles2.css" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" href="#!">Start Bootstrap</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="#!">All Products</a></li>
+							<li><hr class="dropdown-divider" /></li>
+							<li><a class="dropdown-item" href="#!">Popular Items</a></li>
+							<li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+						</ul></li>
+				</ul>
+				<form class="d-flex">
+					<button class="btn btn-outline-dark" type="submit">
+						<i class="bi-cart-fill me-1"></i> Cart <span
+							class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+					</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	<div class="productForm">
+		<div class="h2">
+			<h2>상품 등록</h2>
+		</div>
+		<form action="/modify" method="post">
+			<div>
+				<label>상품번호</label><input type="text" name="productNo"
+					th:value="${product.productNo}" readonly>
+			</div>
+			<div>
+				<label>상품명</label><input type="text" name="name"
+					th:value="${product.name}">
+			</div>
+			<div>
+				<label>가격</label><input type="text" name="price"
+					th:value="${product.price}">
+			</div>
+			<div>
+				<label>상품설명</label><input type="text" name="content"
+					th:value="${product.content}">
+			</div>
+			<div>
+				<label>이미지</label><input type="file" name="imageUrl"
+					th:value="${product.imageUrl}">
+			</div>
+			<div>
+				<label>카테고리</label><input type="text" name="category"
+					th:value="${product.category}">
+			</div>
+			<button type="submit" name="action" value="modify" onclick="return confirm('수정하시겠습니까?');">수정하기</button>
+			<button type="submit" name="action" value="remove" onclick="return confirm('정말 삭제하시겠습니까?');">삭제하기</button>
+		</form>
+		
+	</div>
+</body>
+</html>
