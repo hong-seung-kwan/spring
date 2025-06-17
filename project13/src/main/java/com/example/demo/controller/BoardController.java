@@ -40,9 +40,13 @@ public class BoardController {
 	// 외부에서 게시물데이터를 json 또는 xml 형태로 전달
 	// @RequestBody에 의해서 dto 클래스로 변환
 	
+	// 게시물 데이터를 폼데이터 방식으로 수집(@RequestBody 없을경우)
 	@PostMapping("/register") // 마지막 경로
-	public ResponseEntity<Integer> register(BoardDTO dto) {// 게시물 데이터를 폼데이터 방식으로 수집
-		dto.setWriter("user"); // 임시 아이디
+	public ResponseEntity<Integer> register(BoardDTO dto) {
+		
+		// 시큐리티를 적용하기 전에 사용하는 임시 아이디
+		// 게시물의 작성자는 로그인한 사람의 아이디로 자동으로 처리됨
+		dto.setWriter("user2"); // 임시 아이디
 		int no = service.register(dto);
 		// 201성공코드와 새로운 글번호를 반환한다
 		return new ResponseEntity<>(no, HttpStatus.CREATED); 

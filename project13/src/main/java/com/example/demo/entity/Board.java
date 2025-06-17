@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,9 +31,12 @@ public class Board extends BaseEntity {
 
     @Column(length = 1500, nullable = false)
     String content;
-
-    @Column(length = 50, nullable = false)
-    String writer;
+    
+    // 게시물 테이블의 작성자 컬럼은 회원 테이블의 PK를 참조한다
+    // writer 컬럼을 외래키로 설정
+//    @Column(length = 50, nullable = false)
+    @ManyToOne // 관계 차수
+    Member writer;
     
     @Column(length = 200, nullable = true)
 	String imgPath; // 파일 이름

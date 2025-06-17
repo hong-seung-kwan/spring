@@ -19,7 +19,8 @@ public class MemberController {
 	@Autowired
     MemberService service;
 
-	//localhost:8080/register + 바디(JSON데이터)
+	// 파라미터: 회원 데이터 (json 또는 xml 형식의 데이터)
+	// 반환값: 처리 결과(json 데이터 메세지 바디에 포함)
 	@PostMapping("/register")
 	public ResponseEntity<Boolean> register(@RequestBody MemberDTO dto) {
 		boolean result = service.register(dto);
