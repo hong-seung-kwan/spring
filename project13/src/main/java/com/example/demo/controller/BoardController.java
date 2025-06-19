@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,14 @@ public class BoardController {
 	// @RequestBody에 의해서 dto 클래스로 변환
 	
 	// 게시물 데이터를 폼데이터 방식으로 수집(@RequestBody 없을경우)
+	// @Requestbody 있으면 json 또는 xml 형식 문자열
 	@PostMapping("/register") // 마지막 경로
-	public ResponseEntity<Integer> register(BoardDTO dto) {
-		
-		// 시큐리티를 적용하기 전에 사용하는 임시 아이디
+	public ResponseEntity<Integer> register(BoardDTO dto, Principal principal) {
+		// 인증객체에서 아이디 꺼내기
+		String userId = principal.getName();
 		// 게시물의 작성자는 로그인한 사람의 아이디로 자동으로 처리됨
-		dto.setWriter("user2"); // 임시 아이디
+		// 게시물 작성자 교체
+		dto.setWriter(userId);
 		int no = service.register(dto);
 		// 201성공코드와 새로운 글번호를 반환한다
 		return new ResponseEntity<>(no, HttpStatus.CREATED); 
@@ -55,6 +58,9 @@ public class BoardController {
 	//localhost:8080/board/list
 	@GetMapping("/list")
 	public ResponseEntity<List<BoardDTO>> getList() {
+		
+		System.out.println("board list api...");
+		
 		List<BoardDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
@@ -66,9 +72,10 @@ public class BoardController {
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 게시물정보를 반환한다
 	}
 
-	//localhost:8080/board/modify + 바디(JSON데이터)
+	//localhost:8080/board/modify
+	// 파라미터: json 데이터 -> 폼데이터로 변경(파일이 있기 때문에)
 	@PutMapping("/modify")
-	public ResponseEntity modify(@RequestBody BoardDTO dto) {
+	public ResponseEntity modify(BoardDTO dto) {
 		 service.modify(dto);
 		 return new ResponseEntity(HttpStatus.NO_CONTENT); //204성공코드를 반환한다
 	}

@@ -22,9 +22,10 @@ public class SecurityConfig {
 
 	// 필터를 빈으로 등록
 	// 이제 자동으로 필터체인에 새로운 필터가 추가됨
+	// check 필터를 생성할 때, 필요한 UserDetailsService 주입
 	@Bean
 	ApiCheckFilter apiCheckFilter() {
-		return new ApiCheckFilter();
+		return new ApiCheckFilter(customUserDetailsService());
 	}
 	
 	// SecurityFilterChain: 사용자 인증 절차
