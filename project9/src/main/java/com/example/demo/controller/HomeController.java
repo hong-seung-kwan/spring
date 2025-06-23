@@ -15,6 +15,6 @@ public class HomeController {
 	@GetMapping("/")
 	public String home() {
 		// 반환값: home 폴더 아래 main.html
-		return "/home/main";
+		return "home/main";
 	}
 }

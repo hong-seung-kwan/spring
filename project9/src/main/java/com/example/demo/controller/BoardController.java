@@ -54,7 +54,7 @@ public class BoardController {
 
         // 게시물 등록하고 새로운 게시물 번호 반환
         int no = service.register(dto);
-        
+               
         // 리다이레트된 페이지(목록화면)에 새로운 게시물 번호 전달
         redirectAttributes.addFlashAttribute("msg", no);
         
