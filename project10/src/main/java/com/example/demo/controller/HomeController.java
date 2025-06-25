@@ -15,13 +15,13 @@ public class HomeController {
 	@GetMapping("/")
 	public String home() {
 		// 반환값: home 폴더 아래 main.html
-		return "/home/main";
+		return "home/main";
 	}
 	
 	// 로그인 화면을 반환하는 함수
 	// 반환값: home 폴더 아래 login.html
 	@GetMapping("/customlogin")
 	public String customLogin() {
-		return "/home/login";
+		return "home/login";
 	}
 }

@@ -11,6 +11,7 @@ import com.example.demo.dto.BoardDTO;
 import com.example.demo.entity.Board;
 import com.example.demo.repository.BoardRepository;
 import com.example.demo.util.FileUtil;
+import com.example.demo.util.S3FileUtil;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -19,13 +20,14 @@ public class BoardServiceImpl implements BoardService {
 	BoardRepository repository;
 	
 	@Autowired
-	FileUtil fileUtil;
+//	FileUtil fileUtil;
+	S3FileUtil s3FileUtil;
 
 	@Override
 	public int register(BoardDTO dto) {
 		Board entity = dtoToEntity(dto);
 		
-		String imgPath = fileUtil.fileUpload(dto.getUploadFile());
+		String imgPath = s3FileUtil.fileUpload(dto.getUploadFile());
 		entity.setImgPath(imgPath);
 		repository.save(entity);
 		

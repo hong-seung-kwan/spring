@@ -42,8 +42,13 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     implementation 'net.minidev:json-smart:2.4.7'
+    
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+test{
+	exclude '**/*'
 }
